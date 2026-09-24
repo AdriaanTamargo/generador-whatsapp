@@ -25,9 +25,19 @@
             background-color: #efeae2;
             background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
         }
-        /* Oculta la flecha fea de datalist en algunos navegadores para un diseño más limpio */
-        input::-webkit-calendar-picker-indicator {
-            opacity: 0;
+        /* Scrollbar personalizada para el menú */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9; 
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
         }
     </style>
 </head>
@@ -64,78 +74,31 @@
             </div>
 
             <div class="space-y-6">
-                <!-- Teléfono con Buscador de País -->
+                <!-- Teléfono con Selector Personalizado -->
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-2">Número de WhatsApp</label>
-                    <div class="flex shadow-sm rounded-lg border border-slate-300 overflow-hidden focus-within:border-emerald-500 focus-within:ring-1 focus-within:ring-emerald-500 transition">
+                    <div class="flex shadow-sm rounded-lg border border-slate-300 overflow-visible focus-within:border-emerald-500 focus-within:ring-1 focus-within:ring-emerald-500 transition relative">
                         
-                        <!-- Input con Datalist para buscar -->
-                        <input type="text" id="country-code" list="countries" value="+34" class="bg-slate-50 border-r border-slate-300 text-slate-700 font-bold px-2 py-3 outline-none cursor-text w-[120px] text-center" placeholder="Ej: +34" title="Escribe para buscar tu país">
-                        <datalist id="countries">
-                            <option value="+34">🇪🇸 España</option>
-                            <option value="+1">🇺🇸 Estados Unidos / Canadá</option>
-                            <option value="+7">🇷🇺 Rusia</option>
-                            <option value="+20">🇪🇬 Egipto</option>
-                            <option value="+27">🇿🇦 Sudáfrica</option>
-                            <option value="+30">🇬🇷 Grecia</option>
-                            <option value="+31">🇳🇱 Países Bajos</option>
-                            <option value="+32">🇧🇪 Bélgica</option>
-                            <option value="+33">🇫🇷 Francia</option>
-                            <option value="+39">🇮🇹 Italia</option>
-                            <option value="+41">🇨🇭 Suiza</option>
-                            <option value="+43">🇦🇹 Austria</option>
-                            <option value="+44">🇬🇧 Reino Unido</option>
-                            <option value="+45">🇩🇰 Dinamarca</option>
-                            <option value="+46">🇸🇪 Suecia</option>
-                            <option value="+47">🇳🇴 Noruega</option>
-                            <option value="+48">🇵🇱 Polonia</option>
-                            <option value="+49">🇩🇪 Alemania</option>
-                            <option value="+51">🇵🇪 Perú</option>
-                            <option value="+52">🇲🇽 México</option>
-                            <option value="+53">🇨🇺 Cuba</option>
-                            <option value="+54">🇦🇷 Argentina</option>
-                            <option value="+55">🇧🇷 Brasil</option>
-                            <option value="+56">🇨🇱 Chile</option>
-                            <option value="+57">🇨🇴 Colombia</option>
-                            <option value="+58">🇻🇪 Venezuela</option>
-                            <option value="+60">🇲🇾 Malasia</option>
-                            <option value="+61">🇦🇺 Australia</option>
-                            <option value="+62">🇮🇩 Indonesia</option>
-                            <option value="+63">🇵🇭 Filipinas</option>
-                            <option value="+64">🇳🇿 Nueva Zelanda</option>
-                            <option value="+65">🇸🇬 Singapur</option>
-                            <option value="+66">🇹🇭 Tailandia</option>
-                            <option value="+81">🇯🇵 Japón</option>
-                            <option value="+82">🇰🇷 Corea del Sur</option>
-                            <option value="+84">🇻🇳 Vietnam</option>
-                            <option value="+86">🇨🇳 China</option>
-                            <option value="+90">🇹🇷 Turquía</option>
-                            <option value="+91">🇮🇳 India</option>
-                            <option value="+92">🇵🇰 Pakistán</option>
-                            <option value="+98">🇮🇷 Irán</option>
-                            <option value="+212">🇲🇦 Marruecos</option>
-                            <option value="+234">🇳🇬 Nigeria</option>
-                            <option value="+254">🇰🇪 Kenia</option>
-                            <option value="+351">🇵🇹 Portugal</option>
-                            <option value="+353">🇮🇪 Irlanda</option>
-                            <option value="+358">🇫🇮 Finlandia</option>
-                            <option value="+380">🇺🇦 Ucrania</option>
-                            <option value="+502">🇬🇹 Guatemala</option>
-                            <option value="+503">🇸🇻 El Salvador</option>
-                            <option value="+504">🇭🇳 Honduras</option>
-                            <option value="+505">🇳🇮 Nicaragua</option>
-                            <option value="+506">🇨🇷 Costa Rica</option>
-                            <option value="+507">🇵🇦 Panamá</option>
-                            <option value="+591">🇧🇴 Bolivia</option>
-                            <option value="+593">🇪🇨 Ecuador</option>
-                            <option value="+595">🇵🇾 Paraguay</option>
-                            <option value="+598">🇺🇾 Uruguay</option>
-                            <option value="+880">🇧🇩 Bangladesh</option>
-                            <option value="+966">🇸🇦 Arabia Saudita</option>
-                            <option value="+971">🇦🇪 Emiratos Árabes</option>
-                            <option value="+972">🇮🇱 Israel</option>
-                        </datalist>
+                        <!-- Componente de Selección Custom -->
+                        <div class="relative flex-shrink-0" id="custom-select-container">
+                            <!-- Botón visible -->
+                            <div id="select-trigger" class="bg-slate-50 border-r border-slate-300 text-slate-700 font-bold px-3 py-3 w-[110px] h-full flex justify-between items-center cursor-pointer hover:bg-slate-100 transition">
+                                <span id="selected-flag-text">🇪🇸 +34</span>
+                                <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            
+                            <!-- Menú Desplegable Oculto -->
+                            <div id="select-dropdown" class="absolute top-full left-0 mt-1 w-[260px] bg-white border border-slate-200 rounded-lg shadow-xl z-50 hidden flex-col overflow-hidden">
+                                <div class="p-2 border-b border-slate-100 bg-slate-50">
+                                    <input type="text" id="country-search" class="w-full bg-white border border-slate-300 rounded-md p-2 text-sm outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" placeholder="Buscar país o prefijo...">
+                                </div>
+                                <ul id="country-list" class="max-h-60 overflow-y-auto custom-scrollbar p-1">
+                                    <!-- Generado por JS -->
+                                </ul>
+                            </div>
+                        </div>
 
+                        <!-- Input del teléfono -->
                         <input type="text" id="phone" placeholder="600 123 456" class="w-full p-3 text-slate-800 outline-none placeholder-slate-400">
                     </div>
                 </div>
@@ -144,7 +107,7 @@
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-2">Mensaje predeterminado <span class="text-slate-400 font-normal">(Opcional)</span></label>
                     
-                    <div class="border border-slate-300 rounded-lg overflow-visible focus-within:ring-1 focus-within:ring-emerald-500 focus-within:border-emerald-500 transition shadow-sm bg-white relative">
+                    <div class="border border-slate-300 rounded-lg overflow-visible focus-within:ring-1 focus-within:ring-emerald-500 focus-within:border-emerald-500 transition shadow-sm bg-white relative z-40">
                         <!-- Barra de herramientas -->
                         <div class="flex items-center gap-1 bg-slate-50 border-b border-slate-200 p-2">
                             <button type="button" onclick="insertFormat('*', '*')" class="w-8 h-8 flex justify-center items-center rounded hover:bg-slate-200 text-slate-700 font-bold transition" title="Negrita">B</button>
@@ -230,10 +193,154 @@
     </main>
 
     <script>
+        // --- BASE DE DATOS DE PAÍSES Y LÓGICA DEL SELECTOR ---
+        const countriesData = [
+            { flag: '🇪🇸', code: '+34', name: 'España' },
+            { flag: '🇺🇸', code: '+1', name: 'Estados Unidos / Canadá' },
+            { flag: '🇷🇺', code: '+7', name: 'Rusia' },
+            { flag: '🇪🇬', code: '+20', name: 'Egipto' },
+            { flag: '🇿🇦', code: '+27', name: 'Sudáfrica' },
+            { flag: '🇬🇷', code: '+30', name: 'Grecia' },
+            { flag: '🇳🇱', code: '+31', name: 'Países Bajos' },
+            { flag: '🇧🇪', code: '+32', name: 'Bélgica' },
+            { flag: '🇫🇷', code: '+33', name: 'Francia' },
+            { flag: '🇮🇹', code: '+39', name: 'Italia' },
+            { flag: '🇨🇭', code: '+41', name: 'Suiza' },
+            { flag: '🇦🇹', code: '+43', name: 'Austria' },
+            { flag: '🇬🇧', code: '+44', name: 'Reino Unido' },
+            { flag: '🇩🇰', code: '+45', name: 'Dinamarca' },
+            { flag: '🇸🇪', code: '+46', name: 'Suecia' },
+            { flag: '🇳🇴', code: '+47', name: 'Noruega' },
+            { flag: '🇵🇱', code: '+48', name: 'Polonia' },
+            { flag: '🇩🇪', code: '+49', name: 'Alemania' },
+            { flag: '🇵🇪', code: '+51', name: 'Perú' },
+            { flag: '🇲🇽', code: '+52', name: 'México' },
+            { flag: '🇨🇺', code: '+53', name: 'Cuba' },
+            { flag: '🇦🇷', code: '+54', name: 'Argentina' },
+            { flag: '🇧🇷', code: '+55', name: 'Brasil' },
+            { flag: '🇨🇱', code: '+56', name: 'Chile' },
+            { flag: '🇨🇴', code: '+57', name: 'Colombia' },
+            { flag: '🇻🇪', code: '+58', name: 'Venezuela' },
+            { flag: '🇲🇾', code: '+60', name: 'Malasia' },
+            { flag: '🇦🇺', code: '+61', name: 'Australia' },
+            { flag: '🇮🇩', code: '+62', name: 'Indonesia' },
+            { flag: '🇵🇭', code: '+63', name: 'Filipinas' },
+            { flag: '🇳🇿', code: '+64', name: 'Nueva Zelanda' },
+            { flag: '🇸🇬', code: '+65', name: 'Singapur' },
+            { flag: '🇹🇭', code: '+66', name: 'Tailandia' },
+            { flag: '🇯🇵', code: '+81', name: 'Japón' },
+            { flag: '🇰🇷', code: '+82', name: 'Corea del Sur' },
+            { flag: '🇻🇳', code: '+84', name: 'Vietnam' },
+            { flag: '🇨🇳', code: '+86', name: 'China' },
+            { flag: '🇹🇷', code: '+90', name: 'Turquía' },
+            { flag: '🇮🇳', code: '+91', name: 'India' },
+            { flag: '🇵🇰', code: '+92', name: 'Pakistán' },
+            { flag: '🇮🇷', code: '+98', name: 'Irán' },
+            { flag: '🇲🇦', code: '+212', name: 'Marruecos' },
+            { flag: '🇳🇬', code: '+234', name: 'Nigeria' },
+            { flag: '🇰🇪', code: '+254', name: 'Kenia' },
+            { flag: '🇵🇹', code: '+351', name: 'Portugal' },
+            { flag: '🇮🇪', code: '+353', name: 'Irlanda' },
+            { flag: '🇫🇮', code: '+358', name: 'Finlandia' },
+            { flag: '🇺🇦', code: '+380', name: 'Ucrania' },
+            { flag: '🇬🇹', code: '+502', name: 'Guatemala' },
+            { flag: '🇸🇻', code: '+503', name: 'El Salvador' },
+            { flag: '🇭🇳', code: '+504', name: 'Honduras' },
+            { flag: '🇳🇮', code: '+505', name: 'Nicaragua' },
+            { flag: '🇨🇷', code: '+506', name: 'Costa Rica' },
+            { flag: '🇵🇦', code: '+507', name: 'Panamá' },
+            { flag: '🇧🇴', code: '+591', name: 'Bolivia' },
+            { flag: '🇪🇨', code: '+593', name: 'Ecuador' },
+            { flag: '🇵🇾', code: '+595', name: 'Paraguay' },
+            { flag: '🇺🇾', code: '+598', name: 'Uruguay' },
+            { flag: '🇧🇩', code: '+880', name: 'Bangladesh' },
+            { flag: '🇸🇦', code: '+966', name: 'Arabia Saudita' },
+            { flag: '🇦🇪', code: '+971', name: 'Emiratos Árabes' },
+            { flag: '🇮🇱', code: '+972', name: 'Israel' }
+        ];
+
+        let activeCountryCode = '+34';
+        const selectTrigger = document.getElementById('select-trigger');
+        const selectDropdown = document.getElementById('select-dropdown');
+        const countrySearch = document.getElementById('country-search');
+        const countryList = document.getElementById('country-list');
+        const selectedFlagText = document.getElementById('selected-flag-text');
+        const selectContainer = document.getElementById('custom-select-container');
+
+        // Generar lista de países
+        function renderCountries(filterText = '') {
+            countryList.innerHTML = '';
+            const lowerFilter = filterText.toLowerCase();
+            
+            const filtered = countriesData.filter(c => 
+                c.name.toLowerCase().includes(lowerFilter) || 
+                c.code.includes(lowerFilter)
+            );
+
+            if (filtered.length === 0) {
+                countryList.innerHTML = '<li class="p-3 text-sm text-slate-500 text-center">No se encontraron resultados</li>';
+                return;
+            }
+
+            filtered.forEach(country => {
+                const li = document.createElement('li');
+                li.className = 'px-3 py-2 hover:bg-emerald-50 cursor-pointer text-sm flex items-center justify-between rounded-md transition';
+                
+                // Si es el seleccionado actualmente, destacarlo
+                if(country.code === activeCountryCode) {
+                    li.classList.add('bg-emerald-50', 'font-semibold', 'text-emerald-700');
+                } else {
+                    li.classList.add('text-slate-700');
+                }
+
+                li.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <span class="text-lg">${country.flag}</span>
+                        <span>${country.name}</span>
+                    </div>
+                    <span class="text-slate-400 font-mono">${country.code}</span>
+                `;
+                
+                li.addEventListener('click', () => {
+                    activeCountryCode = country.code;
+                    selectedFlagText.innerHTML = `${country.flag} ${country.code}`;
+                    selectDropdown.classList.add('hidden');
+                });
+                
+                countryList.appendChild(li);
+            });
+        }
+
+        // Eventos del selector
+        selectTrigger.addEventListener('click', () => {
+            selectDropdown.classList.toggle('hidden');
+            if(!selectDropdown.classList.contains('hidden')) {
+                countrySearch.value = '';
+                renderCountries();
+                countrySearch.focus();
+            }
+        });
+
+        countrySearch.addEventListener('input', (e) => {
+            renderCountries(e.target.value);
+        });
+
+        // Cerrar al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (!selectContainer.contains(e.target)) {
+                selectDropdown.classList.add('hidden');
+            }
+        });
+
+        // Inicializar
+        renderCountries();
+
+
+        // --- RESTO DE LA LÓGICA (EMOJIS, TEXTO, GENERADOR) ---
         const messageInput = document.getElementById('message');
         const previewText = document.getElementById('preview-text');
         
-        // Lógica del menú de emojis
+        // Emojis
         const emojiBtn = document.getElementById('emoji-btn');
         const emojiContainer = document.getElementById('emoji-picker-container');
         const picker = document.querySelector('emoji-picker');
@@ -253,7 +360,7 @@
             emojiContainer.classList.add('hidden');
         });
 
-        // Herramientas de texto
+        // Formato
         function insertFormat(startTag, endTag) {
             const startPos = messageInput.selectionStart;
             const endPos = messageInput.selectionEnd;
@@ -275,6 +382,7 @@
             updatePreview();
         }
 
+        // Previsualización
         function updatePreview() {
             let val = messageInput.value;
             if(val.trim() === '') {
@@ -297,18 +405,15 @@
 
         messageInput.addEventListener('input', updatePreview);
 
-        // Generador
+        // Generar Link
         function generateLink() {
-            // Extraemos solo los números del campo del país por si el usuario escribe texto de más
-            let countryInput = document.getElementById('country-code').value;
-            let countryCode = countryInput.replace(/[^0-9]/g, ''); 
-            
+            let countryCode = activeCountryCode.replace(/[^0-9]/g, ''); 
             let phoneInput = document.getElementById('phone').value.trim();
             let cleanPhone = phoneInput.replace(/[^0-9]/g, '');
             let message = document.getElementById('message').value.trim();
             
             if (!cleanPhone || !countryCode) {
-                alert('Por favor, introduce un prefijo y un número de teléfono válidos.');
+                alert('Por favor, introduce un número de teléfono válido.');
                 return;
             }
 

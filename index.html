@@ -75,10 +75,27 @@
                     </div>
                 </div>
                 
-                <!-- Mensaje -->
+                <!-- Mensaje con Toolbar -->
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-2">Mensaje predeterminado <span class="text-slate-400 font-normal">(Opcional)</span></label>
-                    <textarea id="message" rows="4" placeholder="Hola, me gustaría recibir más información." class="w-full border border-slate-300 rounded-lg p-3 text-slate-800 focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition resize-none shadow-sm"></textarea>
+                    
+                    <div class="border border-slate-300 rounded-lg overflow-hidden focus-within:ring-1 focus-within:ring-emerald-500 focus-within:border-emerald-500 transition shadow-sm bg-white">
+                        <!-- Barra de herramientas -->
+                        <div class="flex items-center gap-1 bg-slate-50 border-b border-slate-200 p-2">
+                            <button type="button" onclick="insertFormat('*', '*')" class="w-8 h-8 flex justify-center items-center rounded hover:bg-slate-200 text-slate-700 font-bold transition" title="Negrita">B</button>
+                            <button type="button" onclick="insertFormat('_', '_')" class="w-8 h-8 flex justify-center items-center rounded hover:bg-slate-200 text-slate-700 italic font-serif transition" title="Cursiva">I</button>
+                            <button type="button" onclick="insertFormat('~', '~')" class="w-8 h-8 flex justify-center items-center rounded hover:bg-slate-200 text-slate-700 line-through transition" title="Tachado">S</button>
+                            
+                            <div class="w-px h-5 bg-slate-300 mx-1"></div>
+                            
+                            <button type="button" onclick="insertEmoji('😊')" class="w-8 h-8 flex justify-center items-center rounded hover:bg-slate-200 hover:scale-110 transition">😊</button>
+                            <button type="button" onclick="insertEmoji('💼')" class="w-8 h-8 flex justify-center items-center rounded hover:bg-slate-200 hover:scale-110 transition">💼</button>
+                            <button type="button" onclick="insertEmoji('🚀')" class="w-8 h-8 flex justify-center items-center rounded hover:bg-slate-200 hover:scale-110 transition">🚀</button>
+                            <button type="button" onclick="insertEmoji('👇')" class="w-8 h-8 flex justify-center items-center rounded hover:bg-slate-200 hover:scale-110 transition">👇</button>
+                        </div>
+                        
+                        <textarea id="message" rows="4" placeholder="Hola, me gustaría recibir más información." class="w-full p-3 text-slate-800 outline-none resize-none bg-transparent"></textarea>
+                    </div>
                 </div>
                 
                 <!-- Botón Principal -->
@@ -148,16 +165,52 @@
         const messageInput = document.getElementById('message');
         const previewText = document.getElementById('preview-text');
 
-        messageInput.addEventListener('input', function() {
-            if(this.value.trim() === '') {
+        // Herramientas de texto
+        function insertFormat(startTag, endTag) {
+            const startPos = messageInput.selectionStart;
+            const endPos = messageInput.selectionEnd;
+            const text = messageInput.value;
+            const selectedText = text.substring(startPos, endPos);
+            
+            messageInput.value = text.substring(0, startPos) + startTag + selectedText + endTag + text.substring(endPos);
+            messageInput.focus();
+            messageInput.selectionEnd = startPos + startTag.length + selectedText.length;
+            updatePreview();
+        }
+
+        function insertEmoji(emoji) {
+            const startPos = messageInput.selectionStart;
+            const text = messageInput.value;
+            messageInput.value = text.substring(0, startPos) + emoji + text.substring(startPos);
+            messageInput.focus();
+            messageInput.selectionEnd = startPos + emoji.length;
+            updatePreview();
+        }
+
+        // Actualizar previsualización interpretando el formato de WhatsApp
+        function updatePreview() {
+            let val = messageInput.value;
+            if(val.trim() === '') {
                 previewText.innerHTML = 'Escribe un mensaje...';
                 previewText.classList.add('text-slate-400');
             } else {
-                previewText.innerHTML = this.value.replace(/\n/g, '<br>');
+                let formatted = val
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/\*(.*?)\*/g, '<b>$1</b>')
+                    .replace(/_(.*?)_/g, '<i>$1</i>')
+                    .replace(/~(.*?)~/g, '<strike>$1</strike>')
+                    .replace(/\n/g, '<br>');
+                
+                previewText.innerHTML = formatted;
                 previewText.classList.remove('text-slate-400');
             }
-        });
+        }
 
+        messageInput.addEventListener('input', updatePreview);
+
+        // Generador
         function generateLink() {
             let countryCode = document.getElementById('country-code').value;
             let phoneInput = document.getElementById('phone').value.trim();

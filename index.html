@@ -10,13 +10,16 @@
     <meta name="keywords" content="crear link whatsapp, generador enlaces whatsapp, link directo whatsapp, codigo qr whatsapp gratis, wa.me, api whatsapp">
     <meta name="robots" content="index, follow">
     
-    <!-- Favicon (Fotillo) -->
+    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💬</text></svg>">
     
-    <!-- Script de verificación y monetización de Google AdSense -->
+    <!-- Script de AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5609921581440873" crossorigin="anonymous"></script>
 
+    <!-- Tailwind y Emoji Picker -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@1/index.js"></script>
+
     <style>
         .bg-whatsapp-chat {
             background-color: #efeae2;
@@ -40,12 +43,11 @@
     <!-- Layout Principal -->
     <main class="max-w-6xl mx-auto w-full p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-10 flex-grow">
         
-        <!-- Columna Izquierda: Formulario (7 columnas) -->
+        <!-- Columna Izquierda: Formulario -->
         <div class="lg:col-span-7 bg-white p-8 rounded-2xl shadow-xl border border-slate-100 h-fit">
             <h1 class="text-3xl font-extrabold text-slate-900 mb-3">Genera tu enlace directo</h1>
             <p class="text-slate-500 mb-6 leading-relaxed">Crea un link corto y un código QR para que inicien un chat contigo al instante, sin tener que agregarte a contactos.</p>
             
-            <!-- Badges de Confianza -->
             <div class="flex flex-wrap gap-3 mb-8">
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-100">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
@@ -58,7 +60,7 @@
             </div>
 
             <div class="space-y-6">
-                <!-- Teléfono con Selector de País -->
+                <!-- Teléfono -->
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-2">Número de WhatsApp</label>
                     <div class="flex shadow-sm rounded-lg border border-slate-300 overflow-hidden focus-within:border-emerald-500 focus-within:ring-1 focus-within:ring-emerald-500 transition">
@@ -79,7 +81,7 @@
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-2">Mensaje predeterminado <span class="text-slate-400 font-normal">(Opcional)</span></label>
                     
-                    <div class="border border-slate-300 rounded-lg overflow-hidden focus-within:ring-1 focus-within:ring-emerald-500 focus-within:border-emerald-500 transition shadow-sm bg-white">
+                    <div class="border border-slate-300 rounded-lg overflow-visible focus-within:ring-1 focus-within:ring-emerald-500 focus-within:border-emerald-500 transition shadow-sm bg-white relative">
                         <!-- Barra de herramientas -->
                         <div class="flex items-center gap-1 bg-slate-50 border-b border-slate-200 p-2">
                             <button type="button" onclick="insertFormat('*', '*')" class="w-8 h-8 flex justify-center items-center rounded hover:bg-slate-200 text-slate-700 font-bold transition" title="Negrita">B</button>
@@ -88,10 +90,16 @@
                             
                             <div class="w-px h-5 bg-slate-300 mx-1"></div>
                             
-                            <button type="button" onclick="insertEmoji('😊')" class="w-8 h-8 flex justify-center items-center rounded hover:bg-slate-200 hover:scale-110 transition">😊</button>
-                            <button type="button" onclick="insertEmoji('💼')" class="w-8 h-8 flex justify-center items-center rounded hover:bg-slate-200 hover:scale-110 transition">💼</button>
-                            <button type="button" onclick="insertEmoji('🚀')" class="w-8 h-8 flex justify-center items-center rounded hover:bg-slate-200 hover:scale-110 transition">🚀</button>
-                            <button type="button" onclick="insertEmoji('👇')" class="w-8 h-8 flex justify-center items-center rounded hover:bg-slate-200 hover:scale-110 transition">👇</button>
+                            <!-- Botón Emoji -->
+                            <div class="relative">
+                                <button type="button" id="emoji-btn" class="w-8 h-8 flex justify-center items-center rounded hover:bg-slate-200 text-slate-700 transition" title="Insertar Emoji">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </button>
+                                <!-- Contenedor del Picker (Oculto por defecto) -->
+                                <div id="emoji-picker-container" class="absolute z-50 mt-2 hidden shadow-2xl rounded-lg overflow-hidden border border-slate-200 bg-white">
+                                    <emoji-picker class="light"></emoji-picker>
+                                </div>
+                            </div>
                         </div>
                         
                         <textarea id="message" rows="4" placeholder="Hola, me gustaría recibir más información." class="w-full p-3 text-slate-800 outline-none resize-none bg-transparent"></textarea>
@@ -117,10 +125,8 @@
             </div>
         </div>
 
-        <!-- Columna Derecha: Previsualización y QR (5 columnas) -->
+        <!-- Columna Derecha: Previsualización -->
         <div class="lg:col-span-5 space-y-6">
-            
-            <!-- Simulador de Móvil -->
             <div class="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
                 <div class="bg-emerald-600 text-white px-4 py-3 flex items-center gap-3">
                     <div class="w-8 h-8 bg-white/20 rounded-full flex justify-center items-center">
@@ -140,7 +146,7 @@
                 </div>
             </div>
 
-            <!-- Tarjeta del Código QR -->
+            <!-- Código QR -->
             <div class="bg-white p-6 rounded-2xl shadow-xl border border-slate-100 text-center">
                 <h3 class="font-bold text-slate-800 mb-2">Código QR Gratuito</h3>
                 <p class="text-xs text-slate-500 mb-4">Escanea con la cámara para probarlo</p>
@@ -157,13 +163,34 @@
                     Descargar QR
                 </a>
             </div>
-
         </div>
     </main>
 
     <script>
         const messageInput = document.getElementById('message');
         const previewText = document.getElementById('preview-text');
+        
+        // Lógica del menú de emojis
+        const emojiBtn = document.getElementById('emoji-btn');
+        const emojiContainer = document.getElementById('emoji-picker-container');
+        const picker = document.querySelector('emoji-picker');
+
+        emojiBtn.addEventListener('click', () => {
+            emojiContainer.classList.toggle('hidden');
+        });
+
+        // Cerrar emojis al hacer clic fuera
+        document.addEventListener('click', (event) => {
+            if (!emojiBtn.contains(event.target) && !emojiContainer.contains(event.target)) {
+                emojiContainer.classList.add('hidden');
+            }
+        });
+
+        // Insertar emoji seleccionado
+        picker.addEventListener('emoji-click', event => {
+            insertEmoji(event.detail.unicode);
+            emojiContainer.classList.add('hidden');
+        });
 
         // Herramientas de texto
         function insertFormat(startTag, endTag) {
@@ -187,7 +214,7 @@
             updatePreview();
         }
 
-        // Actualizar previsualización interpretando el formato de WhatsApp
+        // Actualizar previsualización
         function updatePreview() {
             let val = messageInput.value;
             if(val.trim() === '') {
